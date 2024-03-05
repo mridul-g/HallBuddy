@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="authentication">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>authentication</title>
+        <link rel="stylesheet" href="">
+    </head>
+
+    <body>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <strong>Message: </strong>{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <h3> Welcome to Hall Buddy</h3>
+
+        {% if user.is_authenticated %}
+            <h3> Hello {{ fname }} </h3>
+            <h3> You are successfully logged in </h3>
+            <button type="button"><a href="/signout"> Logout </a></button>
+
+        {% else %}
+            <button type="button"><a href="/signin"> Login </a></button>
+            <button type="button"><a href="/signup"> Register </a></button>
+            
+        {% endif %}
+</html>
+
+{% comment %} team12.cs253@gmail.com        pass@Team12 {% endcomment %}

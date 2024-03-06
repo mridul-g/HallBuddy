@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="admin_login.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Login Page</title>
+</head>
+<body>
+    <div class="login-container">
+        <img src="HallBuddy.png" alt="Logo" class="logo-img"> <!-- Replace 'your-logo-image.png' with the actual logo image filename -->
+
+        <form action="/signin/" method="post">
+            <h2>Log In</h2>
+
+            <label for="email">Email ID</label>
+            <input type="email" id="email" name="email" required placeholder="Enter admin Email ID">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your Password">
+
+            <div class="forgot-password">
+                <a href="#" class="frgt-pwd-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Sign In</button>
+
+            <div class="sign-up-message">
+                Don't have an account yet? <a href="signup.html" class="signup-link">Sign up for free</a>
+            </div>
+        </form>
+    
+    </div>
+    <div class="login-options">
+
+        <a href="student_login.html"><button class="student-button" href="student_login.html">Student</button></a>
+        <span class="button-spacing"></span>
+        <button class="admin-button">Admin</button>
+    </div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-{%if request.user.designation == "Student" %}
+{% if request.user.designation == "Student" %}
 {% include "student_base.html" %}
 {% else %}
 {% include "admin_base.html" %}

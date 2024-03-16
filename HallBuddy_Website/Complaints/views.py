@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from Complaints.models import Cleaning_Request
+from Complaints.models import Complaint_Request
 from datetime import datetime
 from django.contrib import messages
 
 
 def Past_Request(request):
-    # Displays completed cleaning requests raised by a user in the past
+    # Displays completed complaint requests raised by a user in the past
     if request.user.is_authenticated:
         if request.user.designation == "Student" :
-            user_history = Cleaning_Request.objects.filter(Done=True)
+            user_history = Complaint_Request.objects.filter(Done=True)
             # user_history is a QuerySet storing requests from the user
             return render(request, 'Past_Request.html', context= {'lodging': user_history})
         else:
@@ -21,11 +21,11 @@ def Pending_Request(request):
     # Used to mark pending requests as complete
     if request.user.is_authenticated:
         if request.user.designation == "Student":
-            pending_list = Cleaning_Request.objects.filter(Done = False)
+            pending_list = Complaint_Request.objects.filter(Done = False)
             if request.method == 'POST':
                 x = request.POST.get('identity')
                 # used to identify which request is being marked as complete
-                req=Cleaning_Request.objects.filter(id = int(x))[0]
+                req=Complaint_Request.objects.filter(id = int(x))[0]
                 if(req.User_Name==request.user.username):
                     req.Done = True
                     req.save()
@@ -43,7 +43,7 @@ def Pending_Request(request):
 
 
 def Lodge_Request(request):
-    # Creates a Request object when a cleaning request is lodged
+    # Creates a Request object when a complaint request is lodged
     if request.user.is_authenticated:
         if request.user.designation == "Student" :
             if request.method == 'POST' :
@@ -54,17 +54,17 @@ def Lodge_Request(request):
                 sub_category=request.POST.get('sub_category')  
                 comments=request.POST.get('comment')
                 
-                if Cleaning_Request.objects.filter(User_Name=username, Place=place, location=location, comments=comments,category=category,sub_category=sub_category, Done = False):
+                if Complaint_Request.objects.filter(User_Name=username, Place=place, location=location, comments=comments,category=category,sub_category=sub_category, Done = False):
                     messages.error(request, "You have already applied a similar request. Contact Hall manager directly.")
                 else:
-                    req_object = Cleaning_Request( 
+                    req_object = Complaint_Request( 
                         User_Name=username,
                         Place=place,
                         location=location,
                         comments=comments,
                         category=category,
                         sub_category=sub_category,
-                        Cleaning_DateTime=datetime.now() )
+                        Complaint_DateTime=datetime.now() )
                     req_object.save()   
                     messages.success(request, "Your request has been sent!")
                 return render(request, "Lodge_Request.html", context={"messages": messages.get_messages(request)})
@@ -77,7 +77,7 @@ def Lodge_Request(request):
 def Complaints_hall(request):
     if request.user.is_authenticated:
         if request.user.designation == "Hall Manager":
-            request_list = Cleaning_Request.objects.filter( Done=False )
+            request_list = Complaint_Request.objects.filter( Done=False )
             return render(request, 'Complaints_hall.html', context= {'lodging': request_list})
             # All requests made are displayed to the manager
         else:

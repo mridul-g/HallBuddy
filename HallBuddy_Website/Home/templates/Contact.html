@@ -1,0 +1,336 @@
+{%if request.user.designation == "Student" %}
+{% include "student_base.html" %}
+{% else %}
+{% include "staff_base.html" %}
+{% endif %}
+{%load static%}
+<html lang="en">
+
+<head>
+
+  <title>Contacts</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+  <style>
+    body {
+      background: #e5e5e5;
+    }
+
+    .btn-sm {
+      padding=10% 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <link href="/static/contact.css" rel="stylesheet" />
+    <div class="page1-content">
+      <div class="page1-row02">
+        <div class="page1-card">
+          <div class="page1-card1">
+            <div class="page1-item">
+              <span class="page1-text">
+                <span>
+                  <span>Cultural</span>
+                  <br />
+                  <span>Secretary</span>
+                </span>
+              </span>
+            </div>
+            <div class="page1-telephone">
+              <div class="page1-icon-phone">
+                <div class="page1-phone1">
+                  <div class="page1-x327-phone">
+                    <img
+                      alt="Vector2197"
+                      src="/static/public/external1/vector2197-9wob.svg"
+                      class="page1-vector"
+                    />
+                  </div>
+                </div>
+              </div>
+              <span class="page1-text05">
+                <span>+12 345 6789 0</span>
+              </span>
+            </div>
+            <div class="page1-telephone01">
+              <div class="page1-icon-phone01">
+                <img
+                  alt="email12197"
+                  src="/static/public/external1/email12197-6wfi.svg"
+                  class="page1-email1"
+                />
+              </div>
+              <span class="page1-text07"><a href="mailto:culturalsecy@mail.com">culturalsecy@mail.com</a></span>
+            </div>
+            <div class="page1-avatar-user100">
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-5rkm-200h.png"
+                class="page1-rectangle"
+              />
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-wlzs-200h.png"
+                class="page1-rectangle01"
+              />
+            </div>
+          </div>
+          <div class="page1-card2">
+            <div class="page1-item1">
+              <span class="page1-text08">
+                <span>
+                  <span>Hall</span>
+                  <br />
+                  <span>Warden</span>
+                </span>
+              </span>
+            </div>
+            <div class="page1-telephone02">
+              <div class="page1-icon-phone02">
+                <div class="page1-phone11">
+                  <div class="page1-x327-phone1">
+                    <img
+                      alt="Vector2197"
+                      src="/static/public/external1/vector2197-9wob.svg"
+                      class="page1-vector1"
+                    />
+                  </div>
+                </div>
+              </div>
+              <span class="page1-text13">
+                <span>+12 345 6789 0</span>
+              </span>
+            </div>
+            <div class="page1-telephone03">
+              <div class="page1-icon-phone03">
+                <img
+                  alt="email12197"
+                  src="/static/public/external1/email12197-6wfi.svg"
+                  class="page1-email11"
+                />
+              </div>
+              <span class="page1-text15"><a href="mailto:hallwarden@mail.com">hallwarden@mail.com</a></span>
+            </div>
+            <div class="page1-avatar-user1001">
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-5rkm-200h.png"
+                class="page1-rectangle02"
+              />
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-wlzs-200h.png"
+                class="page1-rectangle03"
+              />
+            </div>
+          </div>
+          <div class="page1-card3">
+            <div class="page1-item2">
+              <span class="page1-text16">
+                <span>
+                  <span>Sports</span>
+                  <br />
+                  <span>Secretary</span>
+                </span>
+              </span>
+            </div>
+            <div class="page1-telephone04">
+              <div class="page1-icon-phone04">
+                <div class="page1-phone12">
+                  <div class="page1-x327-phone2">
+                    <img
+                      alt="Vector2197"
+                      src="/static/public/external1/vector2197-9wob.svg"
+                      class="page1-vector2"
+                    />
+                  </div>
+                </div>
+              </div>
+              <span class="page1-text21">
+                <span>+12 345 6789 0</span>
+              </span>
+            </div>
+            <div class="page1-telephone05">
+              <div class="page1-icon-phone05">
+                <img
+                  alt="email12197"
+                  src="/static/public/external1/email12197-6wfi.svg"
+                  class="page1-email12"
+                />
+              </div>
+              <span class="page1-text23">
+                <span><a href="mailto:sportssecy@mail.com">sportssecy@mail.com</a></span>
+              </span>
+            </div>
+            <div class="page1-avatar-user1002">
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-5rkm-200h.png"
+                class="page1-rectangle04"
+              />
+              <img
+                alt="RectangleI219"
+                src="/static/public/external1/rectanglei219-wlzs-200h.png"
+                class="page1-rectangle05"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page1-row01">
+        <div class="page1-card5">
+          <div class="page1-telephone08">
+            <div class="page1-icon-phone08">
+              <div class="page1-phone14">
+                <div class="page1-x327-phone4">
+                  <img
+                    alt="Vector2148"
+                    src="/static/public/external1/vector2148-4ank.svg"
+                    class="page1-vector3"
+                  />
+                </div>
+              </div>
+            </div>
+            <span class="page1-text34"><span>+12 345 6789 0</span></span>
+          </div>
+          <div class="page1-telephone09">
+            <div class="page1-icon-phone09">
+              <img
+                alt="email12148"
+                src="/static/public/external1/email12148-b4hc.svg"
+                class="page1-email13"
+              />
+            </div>
+            <span class="page1-text36">
+              <span><a href="mailto:hallpresident@mail.com">hallpresident@mail.com</a></span>
+            </span>
+          </div>
+          <div class="page1-item4">
+            <span class="page1-text38">
+              <span>
+                <span>Hall</span>
+                <br />
+                <span>President</span>
+              </span>
+            </span>
+          </div>
+          <div class="page1-avatar-user1003">
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-jyka-200h.png"
+              class="page1-rectangle06"
+            />
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-pn5-200h.png"
+              class="page1-rectangle07"
+            />
+          </div>
+        </div>
+        <div class="page1-card6">
+          <div class="page1-item5">
+            <span class="page1-text43">
+              <span>
+                <span>Mess</span>
+                <br />
+                <span>Secretary</span>
+              </span>
+            </span>
+          </div>
+          <div class="page1-telephone10">
+            <div class="page1-icon-phone10">
+              <div class="page1-phone15">
+                <div class="page1-x327-phone5">
+                  <img
+                    alt="Vector2148"
+                    src="/static/public/external1/vector2148-3tfm.svg"
+                    class="page1-vector4"
+                  />
+                </div>
+              </div>
+            </div>
+            <span class="page1-text48"><span>+12 345 6789 0</span></span>
+          </div>
+          <div class="page1-telephone11">
+            <div class="page1-icon-phone11">
+              <img
+                alt="email12148"
+                src="/static/public/external1/email12148-5ts.svg"
+                class="page1-email14"
+              />
+            </div>
+            <span class="page1-text50">
+              <span><a href="mailto:messsecy@mail.com">messsecy@mail.com</a></span>
+            </span>
+          </div>
+          <div class="page1-avatar-user1004">
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-5ws-200h.png"
+              class="page1-rectangle08"
+            />
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-x8u5-200h.png"
+              class="page1-rectangle09"
+            />
+          </div>
+        </div>
+        <div class="page1-card7">
+          <div class="page1-telephone12">
+            <div class="page1-icon-phone12">
+              <div class="page1-phone16">
+                <div class="page1-x327-phone6">
+                  <img
+                    alt="Vector2149"
+                    src="/static/public/external1/vector2149-npu2.svg"
+                    class="page1-vector5"
+                  />
+                </div>
+              </div>
+            </div>
+            <span class="page1-text52"><span>+12 345 6789 0</span></span>
+          </div>
+          <div class="page1-telephone13">
+            <div class="page1-icon-phone13">
+              <img
+                alt="email12149"
+                src="/static/public/external1/email12149-77w.svg"
+                class="page1-email15"
+              />
+            </div>
+            <span class="page1-text54">
+              <span><a href="mailto:canteensecy@mail.com">canteensecy@mail.com</a></span>
+            </span>
+          </div>
+          <div class="page1-avatar-user1005">
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-ejmj-200h.png"
+              class="page1-rectangle10"
+            />
+            <img
+              alt="RectangleI219"
+              src="/static/public/external1/rectanglei219-vsqc-200h.png"
+              class="page1-rectangle11"
+            />
+          </div>
+          <div class="page1-item6">
+            <span class="page1-text56">
+              <span>
+                <span>Canteen</span>
+                <br />
+                <span>Secretary</span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

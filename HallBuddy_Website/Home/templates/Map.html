@@ -1,0 +1,32 @@
+{%if request.user.designation == "Student" %}
+{% include "student_base.html" %}
+{% else %}
+{% include "staff_base.html" %}
+{% endif %}
+{%load static%}
+<html lang="en">
+
+<head>
+
+  <title>Map</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+  <style>
+    body {
+      background: #e5e5e5;
+    }
+
+    .btn-sm {
+      padding=10% 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main_div">
+    <img src="/static/hall_map.png"style="position:relative; height:1000px"><br><br>
+</div>
+</body>
+</html>

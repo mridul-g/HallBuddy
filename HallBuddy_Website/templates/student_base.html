@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="english">
+  <head>
+    <title>HallBuddy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: rgba(5, 13, 56, 1);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Irish+Grover:wght@400&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+  </head>
+  <body>
+    <link rel="stylesheet" href="/static/style.css" />
+    <div>
+      <link href="/static/student_base.css" rel="stylesheet" />
+
+      <div class="guest-room-booking-container">
+        <div class="guest-room-booking-guest-room-booking">
+          <img
+            alt="Rectangle123131"
+            src="/static/public/external/rectangle123131-9n5u-400w.png"
+            class="guest-room-booking-rectangle12"
+          />
+          <div class="guest-room-booking-group2914">
+            <div class="guest-room-booking-frame1364">
+              <div class="guest-room-booking-group54">
+                <span class="guest-room-booking-text">
+                  <span>{{ request.user.designation }}</span>
+                </span>
+                <img
+                  alt="Ellipse2123132"
+                  src="/static/public/external/ellipse2123132-5lk-200h.png"
+                  class="guest-room-booking-ellipse212"
+                />
+                <span class="guest-room-booking-text02">
+                  <span>{{ request.user.name}}</span>
+                </span>
+              </div>
+              {% if "/guestroom" not in request.path %}
+                <div class="guest-room-booking-group56">
+                  <div class="guest-room-booking-group52">
+                    <b class="guest-room-booking-text04">
+                      <a href="/Home" class="guest-room-booking-text08">
+                      <span>Dashboard</span>
+                    </b>
+                    <img
+                      alt="dashboardblack24dp113132"
+                      src="/static/public/external/dashboardblack24dp113132-ln5i.svg"
+                      class="guest-room-booking-dashboardblack24dp11"
+                    />
+                  </div>
+                  <div class="guest-room-booking-group51">
+                    <span class="guest-room-booking-text06">
+                      <span>Profile</span>
+                    </span>
+                    <div class="guest-room-booking-peoplealtblack24dp1">
+                      <div class="guest-room-booking-group"></div>
+                      <div class="guest-room-booking-group1">
+                        <div class="guest-room-booking-group2">
+                          <img
+                            alt="Vector3133"
+                            src="/static/public/external/vector3133-tpso.svg"
+                            class="guest-room-booking-vector"
+                          />
+                          <img
+                            alt="Vector3134"
+                            src="/static/public/external/vector3134-8g9f.svg"
+                            class="guest-room-booking-vector1"
+                          />
+                          <img
+                            alt="Vector3134"
+                            src="/static/public/external/vector3134-q2cg.svg"
+                            class="guest-room-booking-vector2"
+                          />
+                          <img
+                            alt="Vector3134"
+                            src="/static/public/external/vector3134-2hos.svg"
+                            class="guest-room-booking-vector3"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="guest-room-booking-group50">
+                    <a href="../../Home/map" class="guest-room-booking-text08">
+                      <span>Map</span>
+                    </a>
+                  </div>
+                  <div class="guest-room-booking-group53">
+                    <a href="/Home/contact" class="guest-room-booking-text10">
+                      <span>Contact</span>
+                    </a>
+                  </div>
+                  <!-- dashboard-->
+                  {% if request.path == "/Home" or request.path == "/Home/" %}
+                  <img
+                    alt="Rectangle73134"
+                    src="/static/public/external/rectangle73134-y8t-200w.png"
+                    class="guest-room-booking-rectangle7"
+                  />
+                  {% endif%}
+                  <!-- profile-->
+                  {% if request.path == "/Home/profile"%}
+                  <img
+                    alt="Rectangle73134"
+                    src="/static/public/external/rectangle73134-y8t-200w.png"
+                    class="guest-room-booking-rectangle8"
+                  />
+                  {% endif %}
+                  <!-- map-->
+                  {% if request.path == "/Home/map"%}
+                  <img
+                    alt="Rectangle73134"
+                    src="/static/public/external/rectangle73134-y8t-200w.png"
+                    class="guest-room-booking-rectangle9"
+                  />
+                  {% endif%}
+                  {% if request.path == "/Home/contact" %}
+                  <img
+                    alt="Rectangle73134"
+                    src="/static/public/external/rectangle73134-y8t-200w.png"
+                    class="guest-room-booking-rectangle10"
+                  />
+                  {% endif%}
+                  {% if request.path == "/Home/shop" %}
+                  <img
+                    alt="Rectangle73134"
+                    src="/static/public/external/rectangle73134-y8t-200w.png"
+                    class="guest-room-booking-rectangle11"
+                  />
+                  {% endif%}
+                </div>
+              {% else %}
+                  <div class="guest-room-booking-group56">
+                    <div class="guest-room-booking-group52">
+                      <b class="guest-room-booking-text04">
+                        <a href="/guestroom/book" class="guest-room-booking-text08">
+                        <span>New Request</span>
+                        </a>
+                      </b>
+                      <img
+                        alt="dashboardblack24dp113132"
+                        src="/static/public/external/dashboardblack24dp113132-ln5i.svg"
+                        class="guest-room-booking-dashboardblack24dp11"
+                      />
+                    </div>
+                    <div class="guest-room-booking-group51">
+                      <span class="guest-room-booking-text06">
+                        <a href="/guestroom/pastbookings" class="guest-room-booking-text08">
+                        <span>Past Bookings</span>
+                        </a>
+                      </span>
+                      <div class="guest-room-booking-peoplealtblack24dp1">
+                        <div class="guest-room-booking-group"></div>
+                        <div class="guest-room-booking-group1">
+                          <div class="guest-room-booking-group2">
+                            <img
+                              alt="Vector3133"
+                              src="/static/public/external/vector3133-tpso.svg"
+                              class="guest-room-booking-vector"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Pending-->
+                    {% if request.path == "/guestroom/book" or request.path == "/Home/" %}
+                    <img
+                      alt="Rectangle73134"
+                      src="/static/public/external/rectangle73134-y8t-200w.png"
+                      class="guest-room-booking-rectangle7"
+                    />
+                    {% endif%}
+                    <!-- Aprooved Requests-->
+                    {% if request.path == "/guestroom/pastbookings"%}
+                    <img
+                      alt="Rectangle73134"
+                      src="/static/public/external/rectangle73134-y8t-200w.png"
+                      class="guest-room-booking-rectangle8"
+                    />
+                    {% endif %}
+                  </div>
+              {% endif %}
+              <div class="guest-room-booking-frame1358">
+                <div class="guest-room-booking-taskblack24dp1">
+                  <div class="guest-room-booking-group3"></div>
+                </div>
+                <div class="guest-room-booking-group2909">
+                  <div class="guest-room-booking-logoutblack24dp21">
+                    <div class="guest-room-booking-group4"></div>
+                    <div class="guest-room-booking-group5">
+                      <a href = "/Logout">
+                      <img
+                        alt="Vector3135"
+                        src="/static/public/external/vector3135-4t7q.svg"
+                        class="guest-room-booking-vector4"
+                      />
+                      </a>
+                    </div>
+                  </div>
+                  <a href="/Logout">
+                  <span class="guest-room-booking-text12">
+                    <span>Logout</span>
+                  </span>
+                  </a>
+                </div>
+              </div>
+              {% if "/guestroom" not in request.path %}
+                <a href="../../Home/map" class="guest-room-booking-link">
+                  <img
+                    alt="fibsmapmarker3136"
+                    src="/static/public/external/fibsmapmarker3136-kqig.svg"
+                    class="guest-room-booking-fibsmapmarker"
+                  />
+                </a>
+                <img
+                  alt="buildingstore5515"
+                  src="/static/public/external/buildingstore5515-p6yh.svg"
+                  class="guest-room-booking-buildingstore"
+                />
+                <img
+                  alt="firsphonecall3136"
+                  src="/static/public/external/firsphonecall3136-u7a8.svg"
+                  class="guest-room-booking-firsphonecall"
+                />
+                <a href="../../Home/shop" class="guest-room-booking-text14">
+                  <span>Shop</span>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+          <button class="guest-room-booking-frame-button-master"></button>
+          <img
+            alt="Rectangle53136"
+            src="/static/public/external/rectangle53136-qddo-200h.png"
+            class="guest-room-booking-rectangle5"
+          />
+          <img
+            alt="bellfill3136"
+            src="/static/public/external/bellfill3136-dwbm.svg"
+            class="guest-room-booking-bellfill"
+          />
+          <a href="../../Complaints/Pending_Request">
+          <span class="guest-room-booking-text16"><span>Complaint</span></span>
+          </a>
+          {% comment %} {% if request.path == "/Home" or request.path == "/Home/" or request.path == "/Home/map" or request.path == "/Home/shop" or request.path == "/Home/contact" or request.path == "/Home/profile"%} {% endcomment %}
+          {% if "/Home" in request.path %}
+          <img
+            alt="Line13136"
+            src="/static/public/external/line13136-3b7w.svg"
+            class="guest-room-booking-line1"
+          />
+          {% endif %}
+          {% if "/Complaints" in request.path %}
+          <img
+            alt="Line13136"
+            src="/static/public/external/line13136-3b7w.svg"
+            class="guest-room-booking-line2"
+          />
+          {% endif %}
+          {% if "/guestroom" in request.path %}
+          <img
+            alt="Line13136"
+            src="/static/public/external/line13136-3b7w.svg"
+            class="guest-room-booking-line3"
+          />
+          {% endif %}
+          {% if "/Cleaning" in request.path %}
+          <img
+            alt="Line13136"
+            src="/static/public/external/line13136-3b7w.svg"
+            class="guest-room-booking-line4"
+          />
+          {% endif %}
+          <span class="guest-room-booking-text18"><span>(10)</span></span>
+          <a href="/Home" class="guest-room-booking-text20">
+            <span>Home</span>
+          </a>
+          <a href="/Cleaning" class="guest-room-booking-text22">
+            <span>Room Cleaning</span>
+          </a>
+          <a
+            href="/guestroom/book"
+            class="guest-room-booking-text24"
+          >
+          <span>Guest Room Booking</span>
+          </a>
+          <img
+            src="/static/public/external/hallbuddy-200h.png"
+            alt="image"
+            class="guest-room-booking-image"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

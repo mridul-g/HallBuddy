@@ -1,7 +1,7 @@
 {%if request.user.designation == "Student" %}
 {% include "student_base.html" %}
 {% else %}
-{% include "staff_base.html" %}
+{% include "admin_base.html" %}
 {% endif %}
 {%load static%}
 <html lang="en">

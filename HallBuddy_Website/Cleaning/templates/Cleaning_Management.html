@@ -1,0 +1,299 @@
+{%if request.user.designation == "Student" %}
+{% include "student_base.html" %}
+{% else %}
+{% include "admin_base.html" %}
+{% endif %}
+{%load static%}
+<html>
+    <head>
+        <title>Cleaning Management</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+            .calendar {
+                display: grid;
+                grid-template-rows: auto 1fr;
+                max-width: 300px;
+                position:relative;
+                left:30%;   
+                top:10%; 
+                border: 5px gray solid;
+                border-radius: 10px;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            
+            }
+            
+            .month {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                justify-content: space-between;
+                text-align: center;
+                padding: 5px;
+                border-bottom: 1px solid #ccc;
+                color:white
+            }
+            
+            .month-navigation {
+                cursor: pointer;
+            }
+            
+            .days {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                color: white;
+            }
+            
+            .days .day-name,
+            .days .date {
+                text-align: center;
+                padding: 5px;
+                color: white;
+            }
+            
+            .green {
+                background-color: green;
+                border-radius: 50%; /* Make it circular */
+            }
+            
+            .red {
+                background-color: red;
+                border-radius: 50%; /* Make it circular */
+            }
+            
+            .date:hover {
+                background-color: lightblue;
+                border-radius: 50%; /* Make it circular */
+            }
+            
+            /* Remove all grid lines */
+            .month,
+            .days .day-name,
+            .days .date {
+                border: none;
+            }
+        .main_div{
+            width:75%;
+            height: 75%;
+            top:25%;
+            left:25%;
+            overflow-y: auto;
+            position:absolute;
+            background-color:rgba(46, 46, 72, 1);
+        }
+        .heading{
+            padding-left: 50px;
+            position: relative;
+            top:4%;
+            color:white;
+            display: inline;
+            margin-top: 20px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .contact_details{
+            position:relative;
+            top:20%;
+            left:7%
+        }
+        .heading_2{
+            color:white;
+            display: inline;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .name{
+            position:absolute;
+            top:130%;
+            color:white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .contact{
+            position: absolute;
+            top:220%;
+            color:white;
+            display: inline;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="main_div">
+            <span style="padding-top: 20px;"><h1 class="heading">Room Cleaning</h1></span>
+            <div class="calendar bg-dark-subtle" id="calendar"></div>
+            <script>
+                const calendar = document.getElementById('calendar');
+                let currentDate = new Date();
+                let firstDayOfMonth, lastDayOfMonth;
+            
+                function createCalendar(month, year) {
+                    calendar.innerHTML = ''; // Clear previous calendar
+                    
+                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+                    firstDayOfMonth = new Date(year, month, 1);
+                    lastDayOfMonth = new Date(year, month + 1, 0);
+                    const daysInMonth = lastDayOfMonth.getDate();
+                    const startingDay = firstDayOfMonth.getDay(); // Day of the week for the 1st day
+                    
+                    const monthYearHeader = document.createElement('div');
+                    monthYearHeader.classList.add('month');
+                    monthYearHeader.innerHTML = `
+                        <span class="month-navigation" onclick="prevMonth()">&#60;</span>
+                        <span>${monthNames[month]} ${year}</span>
+                        <span class="month-navigation" onclick="nextMonth()">&#62;</span>
+                    `;
+                    calendar.appendChild(monthYearHeader);
+                    
+                    const daysContainer = document.createElement('div');
+                    daysContainer.classList.add('days');
+                    calendar.appendChild(daysContainer);
+            
+                    for (const dayName of dayNames) {
+                        const dayNameCell = document.createElement('div');
+                        dayNameCell.classList.add('day-name');
+                        dayNameCell.textContent = dayName;
+                        daysContainer.appendChild(dayNameCell);
+                    }
+
+                    fetch("get_marked_dates")
+                    .then(
+                        response => {
+                            console.log(response)
+                            return response.json()
+                        })
+                    .then(data => {
+                        console.log("DATA IS ",data)
+                        const markedDates = data.marked_dates;
+                        markedDates.forEach(d => {
+                            console.log(d["date"])
+                            const [year, month, day] = d["date"].split('-').map(Number);
+                            const cleaned = d["cleaned"]
+                            console.log("DMMYYY ",day,month,year)
+                            const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
+                            const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
+                            console.log("DATEDIV IS ",dateDivIndex)
+                            if(cleaned){
+                                dateDiv.classList.remove('red');
+                                dateDiv.classList.add('green');
+                            }
+                            else {
+                                dateDiv.classList.remove('green');
+                                dateDiv.classList.add('red'); 
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching marked dates:', error);
+                    });
+                    
+                    for (let i = 0; i < startingDay; i++) {
+                        const emptyCell = document.createElement('div');
+                        emptyCell.classList.add('date');
+                        daysContainer.appendChild(emptyCell);
+                    }
+                    
+                    for (let i = 1; i <= daysInMonth; i++) {
+                        const dateDiv = document.createElement('div');
+                        dateDiv.classList.add('date');
+                        dateDiv.textContent = i;
+
+
+                        fetch("get_marked_dates")
+                    .then(
+                        response => {
+                            console.log(response)
+                            return response.json()
+                        })
+                    .then(data => {
+                        console.log("DATA IS ",data)
+                        const markedDates = data.marked_dates;
+                        markedDates.forEach(d => {
+                            console.log(d["date"])
+                            const [year, month, day] = d["date"].split('-').map(Number);
+                            const cleaned = d["cleaned"]
+                            console.log("DMMYYY ",day,month,year)
+                            const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
+                            const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
+                            console.log("DATEDIV IS ",dateDivIndex)
+                            if(cleaned){
+                                dateDiv.classList.remove('red');
+                                dateDiv.classList.add('green');
+                            }
+                            else {
+                                dateDiv.classList.remove('green');
+                                dateDiv.classList.add('red'); 
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching marked dates:', error);
+                    });
+                        dateDiv.addEventListener('click', () => askCleaningStatus(i, month, year));
+                        daysContainer.appendChild(dateDiv);
+                    }
+                }
+            
+            
+                // Inside askCleaningStatus function
+            
+                function askCleaningStatus(day, month, year) {
+                    const response = confirm(`Has the room been cleaned on ${day}-${month + 1}-${year}?`);
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
+                    const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
+            
+                    if (response) {
+                        markDateInDatabase(dateStr, true);
+                        dateDiv.classList.remove('red');
+                        dateDiv.classList.add('green');
+                    } else {
+                        markDateInDatabase(dateStr, false);
+                        dateDiv.classList.remove('green');
+                        dateDiv.classList.add('red');       
+                    }
+                }
+            
+                function markDateInDatabase(date, cleaned) {
+                    console.log("frontend : date : ", date)
+    fetch("/Cleaning/mark_date", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}' // Make sure csrf_token is properly rendered
+        },
+        body: JSON.stringify({ date: date, cleaned: cleaned })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Date marked successfully');
+            // Reload the calendar or update UI as needed
+        } else {
+            console.error('Failed to mark date');
+        }
+    })
+    .catch(error => {
+        console.error('Error marking date:', error);
+    });
+}
+                createCalendar(currentDate.getMonth(), currentDate.getFullYear());
+            
+                // Function to switch to the previous month
+                function prevMonth() {
+                    currentDate.setMonth(currentDate.getMonth() - 1);
+                    createCalendar(currentDate.getMonth(), currentDate.getFullYear());
+                }
+            
+                // Function to switch to the next month
+                function nextMonth() {
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    createCalendar(currentDate.getMonth(), currentDate.getFullYear());
+                }
+            </script>
+            <div class="contact_details">
+                <h2 class="heading_2"> Worker's Contact Details</h2>
+                <hr width="20%">
+                    <div class="name">Name:<b>Ramu Kaka</b></div>
+                    <div class="contact">Phone No.:<b>98765xxxxx</b></div>
+            </div>
+        </div>
+    </body>
+</html>

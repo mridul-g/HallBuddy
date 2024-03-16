@@ -1,0 +1,53 @@
+.calendar {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-width: 300px;
+    border: none; /* Remove border from the calendar */
+}
+
+.month {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.month-navigation {
+    cursor: pointer;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.days .day-name,
+.days .date {
+    text-align: center;
+    padding: 5px;
+}
+
+.green {
+    background-color: green;
+    border-radius: 50%; /* Make it circular */
+}
+
+.red {
+    background-color: red;
+    border-radius: 50%; /* Make it circular */
+}
+
+.date:hover {
+    background-color: lightblue;
+    border-radius: 50%; /* Make it circular */
+}
+
+/* Remove all grid lines */
+.month,
+.days .day-name,
+.days .date {
+    border: none;
+}

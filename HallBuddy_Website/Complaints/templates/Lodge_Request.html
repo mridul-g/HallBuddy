@@ -1,0 +1,241 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Lodge Request</title>
+    <script>
+      window.onload = function() {
+          const dropdown1 = document.getElementById("dropdown1");
+          const dropdown2 = document.getElementById("dropdown2");
+
+          dropdown1.addEventListener("change", function() {
+              const selectedValue = this.value;
+              // Clear existing options in dropdown2
+              dropdown2.innerHTML = "";
+
+              // Add new options based on selectedValue (logic here)
+              if (selectedValue === "Electrical") {
+                  dropdown2.innerHTML = "<option>Fan not working</option><option>Light not working</option><option>Others</option>";
+              } 
+              else if (selectedValue === "Civil") {
+                  dropdown2.innerHTML = "<option>Door Lock Issue</option><option>Drilling Work</option><option>Welding Work</option><option>Others</option>";
+              }
+              else if (selectedValue === "Internet") {
+                  dropdown2.innerHTML = "<option>Lan Port not working</option><option>Wifi- not working<option>Others</option>";
+              }
+              else if (selectedValue === "others") {
+                  dropdown2.innerHTML = "<option>Others</option>";
+              }
+          });
+      };
+  </script>
+    <style>
+      body {
+        background-color:rgba(46,46,72,1);
+      }
+      .main_div {
+        width:70%;
+        height: 70%;
+        top: 35%;
+        left: 25%;
+        overflow-y: auto;
+        position: absolute;
+        background-color: rgba(46,46,72,1);
+        color: white;
+      }
+      .success{
+          text-align: center;
+          
+          padding-bottom: 1vh;
+          color: #155724;
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+          font-size: 1.2em;
+      }
+
+      .error{
+        text-align: center;
+          
+          padding-bottom: 1vh;
+          color: #000000;
+          border-color: rgb(244, 157, 157);
+          font-size: 1.2em;
+          background-color: rgb(244, 157, 157);
+      }
+      .room_text { 
+        margin-top: 12px;
+        text-align: left;
+        letter-spacing: 0;
+        font-family: Inter;
+      }
+      .what_to_clean { 
+        width: 90%;
+        height: 10%;
+        position: relative;
+        left: 4.8%;
+        top: 19.6%;
+        font-family: Inter;
+        font-size: 97%;
+        padding-top: 20px;
+        color: white;
+      }
+      .what_to_clean_text { 
+        position:relative;
+        text-align:left;
+        letter-spacing:0;
+        top: 0%;
+        color: white;
+      }
+      .what_to_clean div {
+        top: 7%;
+      }
+      .room { 
+      position: relative;
+      /*left: 23%;*/
+      }
+      .toilet { 
+        position:relative;
+        /*left: 35%;*/
+      }
+      .corridor { 
+        position:relative;
+        /*left:47%;*/
+      }
+      .other { 
+        /*left: 59%;*/
+        position:relative;
+      }
+      .comments { 
+        width: 90%;
+        height: 50%;
+        position: relative;
+        /*left: 5%;
+        /*top: 31%;*/
+      }
+      .comments_text { 
+      position: relative;
+      font-family: Inter;
+      text-align: left;
+
+      }
+      .comments_rec { 
+        background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 1);
+        /*left: 23%;*/
+
+        /*top: 0%;*/
+        resize: none;
+        font-size: 1vw;
+        width: 72%;
+        height: 250%;
+      }
+      .submit_rec { 
+        width: 13%;
+        height: 7%;
+        position: relative;
+        left: 77%;
+        top: 75%;
+        font-size: 100%;
+        font-family: Inter;
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+      }
+      .submit_text {
+        width: 100%;
+        position: relative;
+        top: 24%;
+        font-family: Inter;
+        text-align: center;
+        font-size: 100%;
+        letter-spacing: 0;
+      }
+      .heading{
+        color:rgb(246, 198, 26);
+        padding-left: 20px;
+        padding-bottom: 50px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+    {% for message in messages %}
+    <div class="{{message.tags}}">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <h1 class="heading">Complaint Management</h1>
+      <form id="main_form" method="POST" formmethod="POST" action="Lodge_Request">
+      {% csrf_token %}
+      <table class="what_to_clean" style="top:11.4%">
+        <tr>
+          <td>Lodge Complain for:</td>
+          <td>
+            <input type="radio" name="place" id="room" value="Room" checked>
+            <label for="room" class="a">Room</label>
+          </td>
+          <td>
+            <input type="radio" name="place" id="toilet" value="Toilet">
+            <label for="toilet" class="b">Toilet</label>             
+          </td>
+          <td>
+            <input type="radio" name="place" id="corridor" value="Corridor">
+            <label for="corridor" class="c">Corridor</label>  
+          </td>
+          <td>
+            <input type="radio" name="place" id="other" value="Others">
+            <label for="other" class="d">Other (Mention in Comments)</label>    
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 18.8%; height: 5%;"><span  class="room_text"> Location:</span></td>
+          <td><input type="text" maxlength="6" class="room_text" style="left: 25.7%; padding: 0.4%;" placeholder="Ex: B-320" name="location" required>
+        </tr>
+        <tr>
+          <td>Complaint Category:</td>
+          <!-- <td>
+          <input type="radio" name="category" id="Electrical" value="Electrical">
+          <label for="Electrical" class="b">Electrical</label>  
+        </td>
+        <td>
+          <input type="radio" name="category" id="Carpentry" value="Carpentry">
+          <label for="Carpentry" class="b">Carpentry</label>  
+        </td>
+        <td>
+          <input type="radio" name="category" id="Civil" value="Civil">
+          <label for="Civil" class="b">Civil Maintenance</label>  
+        </td>
+        <td>
+          <input type="radio" name="category" id="others" value="others">
+          <label for="others" class="b">Others</label>  
+        </td> -->
+        <td>
+          <select id="dropdown1" name="category" style="border-radius: 5px;">
+            <option>Please Select</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Civil">Civil Maintenance</option>
+            <option value="Internet">Internet</option>
+            <option value="others">Others</option>
+          </select>
+        </td>
+        <td>Complaint Sub-Category:</td>
+        <td>
+        <select id="dropdown2" name="sub_category">
+          <option>Please Select</option>
+        </select>
+      </td>
+        </tr>
+        <tr>
+          <td><span  class="comments_text">Complaint Description:</span></td>
+          <td colspan="5" rowspan="2"><textarea class="comments_rec" id="comment" name="comment" placeholder="" maxlength="200"></textarea>
+          </td>
+        </tr>
+      </table>
+        <input type="submit"   class="submit_rec" value="Submit">
+      </form>
+    </div>
+  </body> 
+</html>

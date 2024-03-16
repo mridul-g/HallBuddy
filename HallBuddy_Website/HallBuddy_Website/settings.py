@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Home.apps.HomeConfig',
+    'authentication.apps.AuthenticationConfig',
+    'guestroom.apps.GuestroomConfig',
+    'Complaints.apps.ComplaintsConfig',
+    'Cleaning.apps.CleaningConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +62,9 @@ TEMPLATES = [
         'DIRS': ['templates/',
                  'Home/templates',
                  'guestroom/templates',
+                 'Complaints/templates',
+                 'Cleaning/templates',
+
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,9 +125,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+STATIC_ROOT = BASE_DIR / 'static_files'
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    BASE_DIR / 'templates/static/',
+    BASE_DIR / 'authentication/static/',
+    BASE_DIR / 'Home/static/',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -132,4 +144,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'team12.cs253@gmail.com'         # put gmail id (in the quotes)
 EMAIL_HOST_PASSWORD = 'mzsh xvjh auol ssbn '                           #   put app password for the gmail (in the quotes)
 
-AUTH_USER_MODEL = 'Login.User_class'
+AUTH_USER_MODEL = 'authentication.User_class'

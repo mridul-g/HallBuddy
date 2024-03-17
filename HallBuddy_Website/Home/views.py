@@ -61,7 +61,7 @@ def Make_Homepage (request):
                         else:
                             obj.delete()
 
-                if "add_hidden_item" in request.POST:               # makes an entry which will be filled by mes manager
+                if "add_hidden_item" in request.POST:               # makes an entry which will be filled by hall manager
                     
                     for item1 in Announcement.objects.all():
                         for item2 in Announcement.objects.all():

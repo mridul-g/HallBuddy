@@ -172,3 +172,10 @@ def shop (request):
         return render (request, 'Shop.html')
     else:
         return render(request, "Error.html")
+
+def dues (request):
+    # rendering the dues page
+    if request.user.is_authenticated:
+        return render (request, 'dues.html')
+    else:
+        return render(request, "Error.html")

@@ -42,7 +42,36 @@ INSTALLED_APPS = [
     'guestroom.apps.GuestroomConfig',
     'Complaints.apps.ComplaintsConfig',
     'Cleaning.apps.CleaningConfig',
+    'django_razorpay',
 ]
+
+DJ_RAZORPAY = {
+ "organization_name": "HallBuddy",
+ "organization_email": "team12.cs253@gmail.com",  # Optional
+ "organization_domain": "https://something.com",
+ "organization_logo": "https://company.com/orlogo.png",  # Optional,
+ "nav_links": [("Membership Fee", "/payments/membership-fee"),
+               ("Transactions", "/payments/transactions"),
+               ("Adhoc Pay", "/payments/adhoc"),
+               ("Manual transaction", "/payments/manual-transaction")
+               ],
+ "RAZORPAY_VARIANTS": {
+     "public_key": "rzp_test_6GvpLSAmWckaMk",
+     "secret_key": "Vo9OgyOw1FqGufiqhlWu4Fy32kl",
+     "currency": "inr"
+ },
+  "RAZORPAY_ENABLE_CONVENIENCE_FEE": True,     # You charge a convenience fee to your customer.
+  "USE_PAYMENT_LINK": True                     # If enabled it will create payment link, will not use checkout page
+}
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+  messages.DEBUG: 'alert-info',
+  messages.INFO: 'alert-info',
+  messages.SUCCESS: 'alert-success',
+  messages.WARNING: 'alert-warning',
+  messages.ERROR: 'alert-danger',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

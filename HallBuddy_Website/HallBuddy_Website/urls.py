@@ -28,4 +28,5 @@ urlpatterns = [
     path('guestroom/', include('guestroom.urls')),
     path('Complaints/', include('Complaints.urls')),
     path('Cleaning/', include('Cleaning.urls')),
+    path('payments/', include('django_razorpay.urls', namespace="django_razorpay")),
 ]

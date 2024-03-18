@@ -1,4 +1,4 @@
-{%include "staff_base.html"%} {%load static%}
+{%include "admin_base.html"%} {%load static%}
 <html lang="en">
   <head>
     <title>Complaint Management</title>
@@ -61,7 +61,7 @@
                 <td class="b">{{i.Place}}-{{i.location}}</td>
                 <td class="b">{{i.category}}</td>
                 <td class="b">{{i.sub_category}}</td>
-                <td class="a">{{i.Cleaning_DateTime}}</td>
+                <td class="a">{{i.Complaint_DateTime}}</td>
                 </form>
                 </tr>
                 {% endfor %}

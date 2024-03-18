@@ -1,7 +1,7 @@
 {%if request.user.designation == "Student" %}
 {% include "student_base.html" %}
 {% else %}
-{% include "staff_base.html" %}
+{% include "admin_base.html" %}
 {% endif %}
 {%load static%}
 <html>
@@ -165,14 +165,12 @@
                         const markedDates = data.marked_dates;
                         markedDates.forEach(d => {
                             console.log(d["date"])
-                            const [year, month_, day] = d["date"].split('-').map(Number);
+                            const [year, month, day] = d["date"].split('-').map(Number);
                             const cleaned = d["cleaned"]
-                            console.log("DMMYYY ",day,month_,year)
+                            console.log("DMMYYY ",day,month,year)
                             const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
                             const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
                             console.log("DATEDIV IS ",dateDivIndex)
-                            if(month==month_)
-                                {
                             if(cleaned){
                                 dateDiv.classList.remove('red');
                                 dateDiv.classList.add('green');
@@ -181,7 +179,6 @@
                                 dateDiv.classList.remove('green');
                                 dateDiv.classList.add('red'); 
                             }
-                        }
                         });
                     })
                     .catch(error => {
@@ -196,41 +193,40 @@
                     
                     for (let i = 1; i <= daysInMonth; i++) {
                         const dateDiv = document.createElement('div');
-                        dateDiv.remove('green');
-                        dateDiv.remove('red');
                         dateDiv.classList.add('date');
                         dateDiv.textContent = i;
 
-                    //     fetch("get_marked_dates")
-                    // .then(
-                    //     response => {
-                    //         console.log(response)
-                    //         return response.json()
-                    //     })
-                    // .then(data => {
-                    //     console.log("DATA IS ",data)
-                    //     const markedDates = data.marked_dates;
-                    //     markedDates.forEach(d => {
-                    //         console.log(d["date"])
-                    //         const [year, month, day] = d["date"].split('-').map(Number);
-                    //         const cleaned = d["cleaned"]
-                    //         console.log("DMMYYY ",day,month,year)
-                    //         const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
-                    //         const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
-                    //         console.log("DATEDIV IS ",dateDivIndex)
-                    //         if(cleaned){
-                    //             dateDiv.classList.remove('red');
-                    //             dateDiv.classList.add('green');
-                    //         }
-                    //         else {
-                    //             dateDiv.classList.remove('green');
-                    //             dateDiv.classList.add('red'); 
-                    //         }
-                    //     });
-                    // })
-                    // .catch(error => {
-                    //     console.error('Error fetching marked dates:', error);
-                    // });
+
+                        fetch("get_marked_dates")
+                    .then(
+                        response => {
+                            console.log(response)
+                            return response.json()
+                        })
+                    .then(data => {
+                        console.log("DATA IS ",data)
+                        const markedDates = data.marked_dates;
+                        markedDates.forEach(d => {
+                            console.log(d["date"])
+                            const [year, month, day] = d["date"].split('-').map(Number);
+                            const cleaned = d["cleaned"]
+                            console.log("DMMYYY ",day,month,year)
+                            const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
+                            const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
+                            console.log("DATEDIV IS ",dateDivIndex)
+                            if(cleaned){
+                                dateDiv.classList.remove('red');
+                                dateDiv.classList.add('green');
+                            }
+                            else {
+                                dateDiv.classList.remove('green');
+                                dateDiv.classList.add('red'); 
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching marked dates:', error);
+                    });
                         dateDiv.addEventListener('click', () => askCleaningStatus(i, month, year));
                         daysContainer.appendChild(dateDiv);
                     }

@@ -146,7 +146,6 @@
                     const daysContainer = document.createElement('div');
                     daysContainer.classList.add('days');
                     calendar.appendChild(daysContainer);
-            
                     for (const dayName of dayNames) {
                         const dayNameCell = document.createElement('div');
                         dayNameCell.classList.add('day-name');
@@ -165,12 +164,13 @@
                         const markedDates = data.marked_dates;
                         markedDates.forEach(d => {
                             console.log(d["date"])
-                            const [year, month, day] = d["date"].split('-').map(Number);
+                            const [year, month_, day] = d["date"].split('-').map(Number);
                             const cleaned = d["cleaned"]
-                            console.log("DMMYYY ",day,month,year)
+                            console.log("DMMYYY ",day,month_,year)
                             const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
                             const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
                             console.log("DATEDIV IS ",dateDivIndex)
+                            if(month+1==month_){
                             if(cleaned){
                                 dateDiv.classList.remove('red');
                                 dateDiv.classList.add('green');
@@ -179,6 +179,7 @@
                                 dateDiv.classList.remove('green');
                                 dateDiv.classList.add('red'); 
                             }
+                        }
                         });
                     })
                     .catch(error => {
@@ -190,7 +191,6 @@
                         emptyCell.classList.add('date');
                         daysContainer.appendChild(emptyCell);
                     }
-                    
                     for (let i = 1; i <= daysInMonth; i++) {
                         const dateDiv = document.createElement('div');
                         dateDiv.classList.add('date');
@@ -208,26 +208,19 @@
                         const markedDates = data.marked_dates;
                         markedDates.forEach(d => {
                             console.log(d["date"])
-                            const [year, month, day] = d["date"].split('-').map(Number);
+                            const [year, month_, day] = d["date"].split('-').map(Number);
                             const cleaned = d["cleaned"]
-                            console.log("DMMYYY ",day,month,year)
+                            console.log("DMMYYY ",day,month_,year)
+                            console.log("month",month)
                             const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
                             const dateDiv = calendar.querySelectorAll('.date')[dateDivIndex];
                             console.log("DATEDIV IS ",dateDivIndex)
-                            if(cleaned){
-                                dateDiv.classList.remove('red');
-                                dateDiv.classList.add('green');
-                            }
-                            else {
-                                dateDiv.classList.remove('green');
-                                dateDiv.classList.add('red'); 
-                            }
                         });
                     })
                     .catch(error => {
                         console.error('Error fetching marked dates:', error);
                     });
-                        dateDiv.addEventListener('click', () => askCleaningStatus(i, month, year));
+                        dateDiv.addEventListener('click', () => askCleaningStatus(i,month, year));
                         daysContainer.appendChild(dateDiv);
                     }
                 }
@@ -235,7 +228,7 @@
             
                 // Inside askCleaningStatus function
             
-                function askCleaningStatus(day, month, year) {
+                function askCleaningStatus(day,month, year) {
                     const response = confirm(`Has the room been cleaned on ${day}-${month + 1}-${year}?`);
                     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                     const dateDivIndex = day + firstDayOfMonth.getDay() - 1;
@@ -253,14 +246,15 @@
                 }
             
                 function markDateInDatabase(date, cleaned) {
-                    console.log("frontend : date : ", date)
+                    let room=prompt("Please enter your room number ", "D145");
+                    {% comment %} console.log("frontend : date : ", date) {% endcomment %}
     fetch("/Cleaning/mark_date", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': '{{ csrf_token }}' // Make sure csrf_token is properly rendered
         },
-        body: JSON.stringify({ date: date, cleaned: cleaned })
+        body: JSON.stringify({ room:room, date: date, cleaned: cleaned })
     })
     .then(response => {
         if (response.ok) {
@@ -273,9 +267,9 @@
     .catch(error => {
         console.error('Error marking date:', error);
     });
-}
+}               
                 createCalendar(currentDate.getMonth(), currentDate.getFullYear());
-            
+                
                 // Function to switch to the previous month
                 function prevMonth() {
                     currentDate.setMonth(currentDate.getMonth() - 1);

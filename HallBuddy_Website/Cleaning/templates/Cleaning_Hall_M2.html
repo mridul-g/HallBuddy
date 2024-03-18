@@ -1,0 +1,77 @@
+{%include "admin_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Complaint Management</title>
+    <style>
+        .main_div{
+            width:75%;
+        height: 75%;
+        top:25%;
+        left:25%;
+        overflow-y: auto;
+        position: absolute;
+        background-color: rgba(46, 46, 72, 1);
+
+        }
+        .heading{
+            padding-left: 10px;
+            color:#ffb700;
+            display: inline;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .disp_ar{
+            background-color: hsl(0, 8%, 77%);
+            position: relative;
+            width:92%;
+            height: 95%;
+            top:5%;
+            border-radius: 10px;
+            left:4%;
+        }
+        table,tr{
+            border:2px black solid;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="main_div">
+        <span><h1 class="heading">Cleaning Records</h1></span>
+        <span>
+      </a>
+        </span>
+         <div class="disp_ar">
+            <h2 style="color:darkmagenta;padding-left: 40px;padding-top: 10px;">All Records</h2>
+            <table class="table">
+                <thead>
+                  <tr style="color: purple;">
+                    <th scope="col">User Name</th>
+                    <th scope="col">Room Number</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in records reversed %}
+                <tr>
+                <td class="a">{{i.User_Name}}</td>
+                <td class="a">{{i.room}}</td>
+                <td class="a">{{i.date}}</td>
+                <td class="a">
+                    {% if i.cleaned %}
+                    <span style="color:green">Cleaned<span>
+                    {% else %}
+                    <span style="color:red">Not Cleaned<span>
+                    {% endif %}
+
+                </td>
+                </form>
+                </tr>
+                {% endfor %}
+                </table>
+                </tbody>
+              </table>
+        </div> 
+    </div>
+  </body>
+</html>

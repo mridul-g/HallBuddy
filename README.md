@@ -69,7 +69,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Go on the localhost web address which must have been printed on the terminal.
+Go on the localhost web address :http://127.0.0.1:8000/ which must have been printed on the terminal.
 
 
 

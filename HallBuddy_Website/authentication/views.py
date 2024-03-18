@@ -27,6 +27,8 @@ def Login(request):
                 messages.error(request, 'Incorrect Password or Username')                   #else error
                 return render(request, "Login.html", context={'messages':messages.get_messages(request)})
     else:
+        if request.user.is_authenticated:
+            return redirect(Make_Homepage)
         return render(request, "Login.html")
   
 def Set_Password(request):

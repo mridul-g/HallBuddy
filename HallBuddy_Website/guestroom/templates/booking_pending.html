@@ -46,7 +46,7 @@
       </tr>
       {% for item in query_results_request %}
       <tr>
-        <form action="booking_manager" method="post" >
+        <form action="pending" method="post" >
             {% csrf_token %}
             <td> {{item.username}}
             <input type="hidden" name="username" value="{{item.username}}">

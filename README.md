@@ -57,7 +57,7 @@ pip install -r requirements.txt
 ```
 python manage.py collectstatic
 ```
-
+Use following commands to run the server locally : 
 ```
 python manage.py makemigrations
 ```

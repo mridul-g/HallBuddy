@@ -19,7 +19,7 @@ Broadly, the application will support the following:
 
 | Name                   | Roll no. | Email Id                |
 | ---------------------- | -------- | ----------------------- |
-| Ritesh Hans            | 220893   | riteshhasn22@iitk.ac.in |
+| Ritesh Hans            | 220893   | riteshhans22@iitk.ac.in |
 | Mridul Gupta           | 220672   | mridulg22@iitk.ac.in    |
 | Krutuparna Paranjape   | 210536   | krutuparna21@iitk.ac.in |
 | Mrdul Agarwal          | 210632   | mrdula21@iitk.ac.in     |

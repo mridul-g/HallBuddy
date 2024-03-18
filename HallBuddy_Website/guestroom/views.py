@@ -174,12 +174,13 @@ def pending(request):  # hall manager
                 checkin_date = datetime.strptime(checkin, date_format).date()
                 checkout_date = datetime.strptime(checkout, date_format).date()
 
-                get_booking = Guestroom.objects.get(
+                get_booking = Guestroom.objects.filter(
                     username=username,
                     room=room,
                     checkin_date=checkin_date,
                     checkout_date=checkout_date,
                 )
+                get_booking = get_booking[0]
                 if action == "Approve":
                     get_booking.manager_validation = "YES"
                     get_booking.save()

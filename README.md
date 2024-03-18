@@ -32,7 +32,7 @@ Broadly, the application will support the following:
 
 ## Deployment
 
-The web app is deployed at: 
+The web app is deployed at: http://hallbuddyweb.pythonanywhere.com/
 
 ## How to run the software locally?
 

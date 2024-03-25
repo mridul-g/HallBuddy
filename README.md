@@ -1,7 +1,7 @@
 HallBuddy
 ==================================
 
-This application was made as a course project of [CS253A](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo22.shtml/): Software Development and Operations in spring 2022 under 
+This application was made as a course project of [CS253A](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo22.shtml/): Software Development and Operations in spring 2024 under 
 the guidance of [Dr. Indranil Saha](https://www.cse.iitk.ac.in/users/isaha/).
 
 Hall Buddy is a merged platform designed for the residents of various halls at IITK to access day to day hall functionalities. This portal aims to 

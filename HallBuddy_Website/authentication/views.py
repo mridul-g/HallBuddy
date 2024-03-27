@@ -181,12 +181,12 @@ def SignUp(request):
     else:
         if request.user.is_authenticated:
             return redirect(Make_Homepage)
+        
+        request.session.flush()
         request.session.set_test_cookie()
         options1=1          # option 1 stores if a hall manager has already been made
         if User_class.objects.filter(designation="Hall Manager").exists():
             options1=0
-
-        request.session.flush()
         return render(request, "SignUp.html", context={"options1": options1})
 
 def OTP_Send(request):

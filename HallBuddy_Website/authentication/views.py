@@ -29,6 +29,7 @@ def Login(request):
     else:
         if request.user.is_authenticated:
             return redirect(Make_Homepage)
+        request.session.flush()
         return render(request, "Login.html")
   
 def Set_Password(request):
@@ -185,6 +186,7 @@ def SignUp(request):
         if User_class.objects.filter(designation="Hall Manager").exists():
             options1=0
 
+        request.session.flush()
         return render(request, "SignUp.html", context={"options1": options1})
 
 def OTP_Send(request):

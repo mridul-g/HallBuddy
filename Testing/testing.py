@@ -79,6 +79,11 @@ class Tests:
         self.driver.find_element(By.NAME, "password2").send_keys("1234@Pass")
         self.driver.find_element(By.NAME, "submit_btn").click()
 
+    def matching_password_2(self):
+        self.driver.find_element(By.NAME, "password1").send_keys("1234@Pass2")
+        self.driver.find_element(By.NAME, "password2").send_keys("1234@Pass2")
+        self.driver.find_element(By.NAME, "submit_btn").click()
+
     def mismatching_password(self):
         self.driver.find_element(By.NAME, "password1").send_keys("1234@Pass")
         self.driver.find_element(By.NAME, "password2").send_keys("1234@Pass1")
@@ -124,13 +129,48 @@ class Tests:
         self.driver.find_element(By.ID, "password").send_keys("1234@Pass")
         self.driver.find_element(By.CSS_SELECTOR, value='button').click()
 
+    def wrong_then_correct_test_student_2(self):
+        self.driver.find_element(By.ID, "username").send_keys("tester_student")
+        self.driver.find_element(By.ID, "password").send_keys("1234@Pass123")
+        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Incorrect Password or Username"
+        self.driver.find_element(By.ID, "username").send_keys("tester_student")
+        self.driver.find_element(By.ID, "password").send_keys("1234@Pass2")
+        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
+
+    def incorrect_then_resend_otp(self):
+        self.driver.find_element(By.ID, "otp").send_keys("0000")
+        self.driver.find_element(By.NAME, "submit_btn").click()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Incorrect OTP"
+        self.driver.find_element(By.PARTIAL_LINK_TEXT, "Resend OTP").click()
+        self.correct_OTP()
+
+    def reset_password(self):
+        self.driver.find_element(By.PARTIAL_LINK_TEXT, "Forgot Password").click()
+        self.driver.find_element(By.ID, "username").send_keys("tester_student")
+        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
+        self.incorrect_then_resend_otp()
+        self.mismatching_password()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
+        self.mismatching_password()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
+        self.mismatching_password()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
+        self.matching_password_2()
+
+        in_wait = input("press to quit student account: ")
+        self.wrong_then_correct_test_student_2()
+        in_put = input("new student pass")
+
     def authentication_tests(self):
 
-        self.hallmanager_signup()
+        # self.hallmanager_signup()
         self.student_signup()
         self.wrong_then_correct_test_student()
         in_wait = input("press to quit")
-        self.driver.logout()
+        self.logout()
+        self.reset_password()
+        self.logout()
 
 
 if(__name__ == "__main__"):

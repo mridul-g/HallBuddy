@@ -102,7 +102,7 @@ class Tests:
 
         self.matching_password()
         # can't create the hall manager as one already exists
-        in_wait = input("press to quit hall_manager: ")
+        # in_wait = input("press to quit hall_manager: ")
         assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Someone already exists with this designation"
         print("Hall Manager already exists")
 
@@ -118,7 +118,7 @@ class Tests:
         assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
 
         self.matching_password()
-        in_wait = input("press to quit student account: ")
+        # in_wait = input("press to quit student account: ")
 
     def wrong_then_correct_test_student(self):
         self.driver.find_element(By.ID, "username").send_keys("tester_student")
@@ -158,19 +158,20 @@ class Tests:
         assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
         self.matching_password_2()
 
-        in_wait = input("press to quit student account: ")
+        # in_wait = input("press to quit student account: ")
         self.wrong_then_correct_test_student_2()
-        in_put = input("new student pass")
 
     def authentication_tests(self):
 
-        # self.hallmanager_signup()
+        print("Begining Authentication Tests")
+        self.hallmanager_signup()
         self.student_signup()
         self.wrong_then_correct_test_student()
-        in_wait = input("press to quit")
+        # in_wait = input("press to quit")
         self.logout()
         self.reset_password()
         self.logout()
+        print("Authentication Tests Passed")
 
 
 if(__name__ == "__main__"):

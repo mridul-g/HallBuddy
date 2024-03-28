@@ -92,6 +92,9 @@ class Tests:
         self.driver.find_element(By.ID, "designation").send_keys("Hall Manager")
         self.driver.find_element(By.CSS_SELECTOR, value='button').click()
         self.correct_OTP()
+        self.mismatching_password()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
+
         self.matching_password()
         # can't create the hall manager as one already exists
         in_wait = input("press to quit hall_manager: ")
@@ -106,22 +109,28 @@ class Tests:
         self.driver.find_element(By.ID, "designation").send_keys("Student")
         self.driver.find_element(By.CSS_SELECTOR, value='button').click()
         self.correct_OTP()
+        self.mismatching_password()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Passwords don't match"
+
         self.matching_password()
         in_wait = input("press to quit student account: ")
 
+    def wrong_then_correct_test_student(self):
+        self.driver.find_element(By.ID, "username").send_keys("tester_student")
+        self.driver.find_element(By.ID, "password").send_keys("1234@Pass123")
+        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
+        assert self.driver.find_element(By.CLASS_NAME, "alert-danger").text == "Incorrect Password or Username"
+        self.driver.find_element(By.ID, "username").send_keys("tester_student")
+        self.driver.find_element(By.ID, "password").send_keys("1234@Pass")
+        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
 
     def authentication_tests(self):
 
         self.hallmanager_signup()
         self.student_signup()
-
-        self.driver.find_element(By.ID, "username").send_keys("tester")
-        self.driver.find_element(By.ID, "password").send_keys("1234@Pass")
-        self.driver.find_element(By.CSS_SELECTOR, value='button').click()
+        self.wrong_then_correct_test_student()
         in_wait = input("press to quit")
         self.driver.logout()
-
-
 
 
 if(__name__ == "__main__"):

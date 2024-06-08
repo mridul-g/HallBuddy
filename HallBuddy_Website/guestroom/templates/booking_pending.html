@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Inter&display=swap"
       rel="stylesheet"
     />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{%static 'styles.css'%}" />
 
     <style>
@@ -24,10 +24,10 @@
 
   <body>
     <div class="main_div">
-     
+
         {% if messages %}
             {% for message in messages %}
-            <div class="{{message.tags}}">
+            <div class="{{message.tags}}"   style="color:white">
               {{message}}
             </div>
           {% endfor %}
@@ -39,6 +39,7 @@
         {% comment %} <th style="text-align: center;">Student</th> {% endcomment %}
         <th style="text-align: center;">Student</th>
         <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Room Type</th>
         <th style="text-align: center;">Check in Date</th>
         <th style="text-align: center;">Check out Date</th>
         <th style="text-align: center;">Choose action</th>
@@ -54,22 +55,27 @@
             <td> {{item.room}}
             <input type="hidden" name="room" value="{{item.room}}">
             </td>
+            <td> {{item.type}}
+              <input type="hidden" name="type" value="{{item.type}}">
+              </td>
             <td> {{item.checkin_date}}
               <input type="hidden" name="checkin_date" value="{{item.checkin_date}}"></input>
             </td>
             <td> {{item.checkout_date}}
               <input type="hidden" name="checkout_date" value="{{item.checkout_date}}"></input>
-            </td> 
-            <td><input type="submit" name='action' value='Approve' required></input>
-              <input type="submit" name='action' value='Reject' required></input></td>
+            </td>
+            <td>
+              <button type="submit" name='action' value="Approve" class="btn btn-success btn-sm">Approve</button>
+              <button type="submit" name='action'  value='Reject' class="btn btn-danger btn-sm">Reject</button>
+            </td>
       </form>
       </tr>
       {% endfor %}
-      
+
     </table><br><br>
   </div>
 
       </div>
     </div>
-  </body> 
+  </body>
 </html>

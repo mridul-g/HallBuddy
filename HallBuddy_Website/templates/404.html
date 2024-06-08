@@ -1,0 +1,31 @@
+{%if request.user.designation == "Student" %}
+{% include "student_base.html" %}
+{% else %}
+{% include "admin_base.html" %}
+{% endif %}
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Not Found</title>
+    <style type="text/css">
+        .main_div{
+            width:75%;
+            height: 75%;
+            top:25%;
+            left:25%;
+            overflow-y: auto;
+            position:absolute;
+            background-color:rgba(46, 46, 72, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="main_div">
+        <span style="padding-top: 20px;"><h1 class="heading">Page Not Found !</h1></span>
+        <br>
+        <p>Sorry, the page you are looking for is not available.</p>
+    </div>
+</body>
+</html>

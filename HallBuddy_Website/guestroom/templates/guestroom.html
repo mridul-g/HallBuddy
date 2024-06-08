@@ -5,7 +5,7 @@
 
   <title>Guestroom</title>
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="{%static 'styles.css'%}" />
 
   <style>
@@ -24,11 +24,11 @@
   <div class="main_div">
     {% if messages %}
     {% for message in messages %}
-    <div class="{{message.tags}}">
+    <div class="{{message.tags}}" style="color:white">
       {{message}}
     </div>
     {% endfor %}
-    {% endif %}
+    {% endif %}
     <img src="{%static 'GuestRB.png'%}" style="position:relative;left:100px;"><br><br>
     <table class="grb" cellspacing="10px" cellpadding="5px" align="right">
 
@@ -36,10 +36,34 @@
         <th style="text-align: center;">Room No.</th>
         <th style="text-align: center;">Check in Date</th>
         <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Room Type</th>
         <th style="text-align: center;">Price per day</th>
         <th style="text-align: center;">Availability</th>
       </tr>
-      <tr>
+      {% for room in rooms %}
+        <tr>
+          <form method="post" action='book'>
+            {% csrf_token %}
+            <td style="text-align: center;">{{room.room}}
+              <input type='hidden' name='room' value='{{room.room}}' style="text-align: center;" required></input>
+            </td>
+
+            <td style="text-align: center;"><input type="date" id="test" name="checkin_date" style="text-align: center;" required></td>
+
+            <td style="text-align: center;"><input type="date" id="test" name="checkout_date" style="text-align: center;" required></input></td>
+            <td style="text-align: center;">{{room.type}}
+              <input type="hidden" name="type" value="{{room.type}}" style="text-align: center;" required></input>
+            </td>
+            <td style="text-align: center;">Rs.{{room.price}}
+              <input type="hidden" name="price" value="{{room.price}}" style="text-align: center;" required></input>
+            </td>
+            <td>
+            <button type="submit" name="submit" value="Book" class="btn btn-success btn-sm">Book</button>
+            </td>
+          </form>
+        </tr>
+      {% endfor %}
+      {% comment %} <tr>
         <form method="post" action='book'>
           {% csrf_token %}
           <td>1
@@ -107,7 +131,7 @@
             <input type="submit" name="submit" value="Book" required></input>
           </td>
         </form>
-      </tr>
+      </tr> {% endcomment %}
 
     </table>
     <p><br></p>

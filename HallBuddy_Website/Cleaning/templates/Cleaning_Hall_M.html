@@ -26,8 +26,30 @@
             top:5%;
             border-radius: 10px;
             left:4%;
+            {% comment %} background-color: #333; {% endcomment %}
+            padding: 20px;
+            margin: auto;
         }
-        table,tr{
+        .form_ar label {
+          display: block;
+          color: white;
+          margin-bottom: 10px;
+      }
+      .form_ar input[type="text"],
+      .form_ar input[type="date"],
+      .form_ar input[type="submit"] {
+        width: 50%;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+      .form_ar input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+      }
+      table,tr{
             border:2px black solid;
         }
     </style>
@@ -40,19 +62,21 @@
       </a>
         </span>
         <div class="form_ar">
-            <form id="main_form" method="POST" formmethod="POST" action="get_records">
-                {% csrf_token %}
-             <div>
-                <label for="room_num" style="color: white;">Enter the room number for which you want to see the records:</label>
-                <input type="text" name="room_num" id="room_num" value="Room Number"> 
-            </div>
-            <div>  
-            <label for="filter_date" style="color: white;">Enter the date for which you want to see the records:</label>
-            <input type="date" name="filter_date" id="filter_date"> 
-            </div>
-            <div><input type="submit"   class="submit_rec" value="Submit"></div>
-            </form>
-        </div>
+          <form id="main_form" method="POST" formmethod="POST" action="get_records">
+              {% csrf_token %}
+              <div>
+                  <label for="room_num">Enter the room number for which you want to see the records:</label>
+                  <input type="text" name="room_num" id="room_num" placeholder="Room Number">
+              </div>
+              <div>
+                  <label for="filter_date">Enter the date for which you want to see the records:</label>
+                  <input type="date" name="filter_date" id="filter_date">
+              </div>
+              <div>
+                  <input type="submit" class="submit_rec" value="Submit">
+              </div>
+          </form>
+      </div>
     </div>
   </body>
 </html>

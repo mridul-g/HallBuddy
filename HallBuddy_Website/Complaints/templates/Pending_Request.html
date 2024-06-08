@@ -41,7 +41,7 @@
       }
       .error{
         text-align: center;
-          
+
           padding-bottom: 1vh;
           color: #000000;
           border-color: rgb(244, 157, 157);
@@ -58,7 +58,7 @@
     <div class="main_div">
       {% if messages %}
       {% for message in messages %}
-      <div class="{{message.tags}}">
+      <div class="{{message.tags}}" style="color: white;">
         {{message}}
       </div>
       {% endfor %}
@@ -96,7 +96,7 @@
                       <td class="b">{{i.sub_category}}</td>
                       <td class="a">{{i.Complaint_DateTime}}</td>
                       <td class="d">{{i.comments}}</td>
-                      <td><button type="submit" name = "identity" value = {{i.id}}>Done</button></td>
+                      <td><button type="submit" class="btn btn-outline-success btn-sm"name = "identity" value = {{i.id}}>Resolve</button></td>
                     </form>
                     </tr>
                   {% endfor %}

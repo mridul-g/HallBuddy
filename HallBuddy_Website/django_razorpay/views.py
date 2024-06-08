@@ -192,19 +192,21 @@ def manual_transaction(request):
 
 def addhoc_payment(request):
     if request.method == "POST":
-        razorpay_instance = RazorpayCustom()
-        if razorpay_instance.is_fee_applicable():
-            amount = razorpay_instance.get_amount_with_charges(Decimal(request.POST.get("amount")))
-        else:
-            amount = round(Decimal(request.POST.get("amount")), 2)
+        # razorpay_instance = RazorpayCustom()
+        # if razorpay_instance.is_fee_applicable():
+        #     amount = razorpay_instance.get_amount_with_charges(Decimal(request.POST.get("amount")))
+        # else:
+        #     amount = round(Decimal(request.POST.get("amount")), 2)
 
-        if razorpay_instance.use_payment_link():
-            return redirect(razorpay_instance.create_payment_link(amount=amount,
-                                                                  label=request.POST.get("label"),
-                                                                  reference_id="add_hoc_"))
-        else:
-            return render(request, "django_razorpay/checkout.html",
-                          dict(payment_data=RazorpayCustom().create_order(amount=amount,
-                                                                          name=request.POST.get("label"))))
+        # if razorpay_instance.use_payment_link():
+        #     return redirect(razorpay_instance.create_payment_link(amount=amount,
+        #                                                           label=request.POST.get("label"),
+        #                                                           reference_id="add_hoc_"))
+        # else:
+        #     return render(request, "django_razorpay/checkout.html",
+        #                   dict(payment_data=RazorpayCustom().create_order(amount=amount,
+        #                                                                   name=request.POST.get("label"))))
+        messages.success(self.request, "Payment successful....")
+        return render(request, "django_razorpay/payment_status.html")
     else:
         return render(request, "django_razorpay/adhoc_payment.html")

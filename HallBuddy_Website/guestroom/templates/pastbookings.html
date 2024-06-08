@@ -24,7 +24,7 @@
   <div class="main_div">
     {% if messages %}
     {% for message in messages %}
-    <div class="{{message.tags}}">
+    <div class="{{message.tags}}"   style="color:white">
       {{message}}
     </div>
     {% endfor %}
@@ -38,16 +38,18 @@
         <th style="text-align: center;">Room No.</th>
         <th style="text-align: center;">Check in Date</th>
         <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Room Type</th>
         <th style="text-align: center;">Price per day</th>
         <th style="text-align: center;">Status</th>
       </tr>
       {% for booking in bookings %}
       <tr>
-        <td>{{booking.room}}</td>
-        <td style="background: #cdb7d8;">{{booking.checkin_date}}</td>
-        <td style="background: #cdb7d8;">{{booking.checkout_date}}</td>
-        <td>{{booking.price}}</td>
-        <td> {% if booking.manager_validation == 'YES' %}
+        <td style="text-align: center;">{{booking.room}}</td>
+        <td style="background: #cdb7d8; text-align: center;" >{{booking.checkin_date}}</td>
+        <td style="background: #cdb7d8; text-align: center;">{{booking.checkout_date}}</td>
+        <td style="text-align: center;">{{booking.type}}</td>
+        <td style="text-align: center;">Rs.{{booking.price}}</td>
+        <td style="text-align: center;"> {% if booking.manager_validation == 'YES' %}
           Booked
           {% else %} <font color='grey'><i>Pending...</i></font>
           {% endif %}</td>

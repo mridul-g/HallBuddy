@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+BASEDIR = os.path.dirname(os.path.dirname(__file__))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-6+l!%iddsiyll25a!+#2lq+6skifv+zy2+wxddew-s0(!0tt*1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -88,12 +91,11 @@ ROOT_URLCONF = 'HallBuddy_Website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/',
-                 'Home/templates',
-                 'guestroom/templates',
-                 'Complaints/templates',
-                 'Cleaning/templates',
-
+        'DIRS': [os.path.join(BASEDIR, 'templates/'),
+                 os.path.join(BASEDIR, 'Home/templates/'),
+                 os.path.join(BASEDIR, 'guestroom/templates/'),
+                 os.path.join(BASEDIR, 'Complaints/templates/'),
+                 os.path.join(BASEDIR, 'Cleaning/templates/'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -154,10 +156,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_ROOT = BASE_DIR / 'static_files'
+STATIC_ROOT = os.path.join(BASEDIR , 'static_files')
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'templates/static/',
+    os.path.join(BASEDIR, 'templates/'),
+    os.path.join(BASEDIR, 'templates/static'),
     BASE_DIR / 'authentication/static/',
     BASE_DIR / 'Home/static/',
 ]

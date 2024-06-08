@@ -7,18 +7,19 @@ from django.core.exceptions import ValidationError
 
 class UserManager(BaseUserManager):
     use_in_migrations=True
-    def create_user(self, username, name, designation, password):
+    def create_user(self, username, name, designation, password, dues=0):
         user = self.model(
             username = username,
             name = name,
             designation = designation,
+            dues=dues,
         )
         user.set_password(password)
         user.save()
         return user
 
     def create_superuser(self, username, name, designation, password):
-        
+
         if not designation=='Hall Manager':
             raise ValidationError('Only Hall Manager can be a admin')
         else:
@@ -43,6 +44,7 @@ class User_class(AbstractBaseUser):
         choices=Designation_Choices,
     )
     username = models.CharField(max_length=20, unique=True, blank=True)
+    dues = models.IntegerField(default=0)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['name', 'designation']
 

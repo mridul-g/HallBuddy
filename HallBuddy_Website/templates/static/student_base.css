@@ -33,7 +33,7 @@
 .guest-room-booking-group2914 {
   top: 46px;
   left: 43px;
-  width: 277px;
+  width: 17.25%;
   height: 1005px;
   display: flex;
   position: absolute;
@@ -43,7 +43,7 @@
 .guest-room-booking-frame1364 {
   top: 0px;
   left: 0px;
-  width: 276px;
+  width: 100%;
   height: 1005px;
   display: flex;
   overflow: hidden;
@@ -523,7 +523,7 @@
 }
 .guest-room-booking-line4 {
   top: 129px;
-  right: 116px;
+  left: 1200px;
   width: 189px;
   height: 1px;
   position: absolute;

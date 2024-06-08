@@ -2,6 +2,7 @@ from django.shortcuts import render
 from Complaints.models import Complaint_Request
 from datetime import datetime
 from django.contrib import messages
+from pytz import timezone
 
 
 def Past_Request(request):
@@ -16,7 +17,7 @@ def Past_Request(request):
             return render(request,"Error.html")
     else:
         return render(request,"Error.html")
-    
+
 def Pending_Request(request):
     # Used to mark pending requests as complete
     if request.user.is_authenticated:
@@ -29,7 +30,7 @@ def Pending_Request(request):
                 if(req.User_Name==request.user.username):
                     req.Done = True
                     req.save()
-                    messages.success(request, "Your request has been removed from pending requests successfully")
+                    messages.success(request, "Your request has been removed from pending requests successfully!")
                 else:
                     messages.error(request, "You are unauthorised to mark the status of this request.")
 
@@ -38,7 +39,7 @@ def Pending_Request(request):
 
         else:
             return render(request,"Error.html")
-    else: 
+    else:
         return render(request,"Error.html")
 
 
@@ -50,22 +51,22 @@ def Lodge_Request(request):
                 place = request.POST.get("place")
                 username =request.user.username
                 location = request.POST.get('location')
-                category=request.POST.get('category')  
-                sub_category=request.POST.get('sub_category')  
+                category=request.POST.get('category')
+                sub_category=request.POST.get('sub_category')
                 comments=request.POST.get('comment')
-                
+
                 if Complaint_Request.objects.filter(User_Name=username, Place=place, location=location, comments=comments,category=category,sub_category=sub_category, Done = False):
                     messages.error(request, "You have already applied a similar request. Contact Hall manager directly.")
                 else:
-                    req_object = Complaint_Request( 
+                    req_object = Complaint_Request(
                         User_Name=username,
                         Place=place,
                         location=location,
                         comments=comments,
                         category=category,
                         sub_category=sub_category,
-                        Complaint_DateTime=datetime.now() )
-                    req_object.save()   
+                        Complaint_DateTime=datetime.now(timezone("Asia/Kolkata")) )
+                    req_object.save()
                     messages.success(request, "Your request has been sent!")
                 return render(request, "Lodge_Request.html", context={"messages": messages.get_messages(request)})
             return render(request, "Lodge_Request.html")

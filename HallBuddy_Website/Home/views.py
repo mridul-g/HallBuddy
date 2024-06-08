@@ -4,36 +4,39 @@ from dateutil.rrule import rrule, DAILY
 from django.contrib import messages
 from datetime import datetime
 from Home.models import Announcement
+from authentication.models import User_class
+
 
 # Create your views here.
 
 def Make_Homepage (request):
     # rendering the home page
+    today_date = datetime.today().date()
     if request.user.is_authenticated:
         if(request.user.designation == 'Student'):
+
             announcements = Announcement.objects.all().exclude(Item_Name = "").exclude(Item_Name = "None").order_by(
                 "-Announcement_Date"
             )  # QuerySet containing all announements
-
             if request.method == "POST":
 
                 quantity = int(request.POST.get("quantity"))  # number requested
                 idt = request.POST.get("identity")
                 order = Announcement.objects.filter(id=idt)[0]  # key of the item ordered
-
             return render(request,"Announcements.html",
                 context={
                     "announcements": announcements,
                     "messages": messages.get_messages(request),
+                    "todays_date":today_date,
                 },
             )
-        
+
         # hall manager
         else:
             announcements = Announcement.objects.all().order_by("-Announcement_Date")
 
             if request.method == "POST":
-                
+
                 flag = 0
 
                 if (
@@ -47,9 +50,10 @@ def Make_Homepage (request):
                     # Commits changes to the database
 
                     for obj in Announcement.objects.all():  # for obj in Announcements
-                        
+
                         announcement_date = request.POST.get("announcement_date" + str(obj.id))
-                        if announcement_date is not None:
+                        item = request.POST.get("item" + str(obj.id))
+                        if announcement_date is not None and item!="":
 
                             announcement_date = datetime.strptime(str(announcement_date), "%Y-%m-%d")
                             item = request.POST.get("item" + str(obj.id))
@@ -57,12 +61,12 @@ def Make_Homepage (request):
                             announcement_items.Announcement_Date = announcement_date
                             announcement_items.Item_Name = item
                             announcement_items.save()
-                                
+
                         else:
                             obj.delete()
 
                 if "add_hidden_item" in request.POST:               # makes an entry which will be filled by hall manager
-                    
+
                     for item1 in Announcement.objects.all():
                         for item2 in Announcement.objects.all():
                             if item1.id != item2.id:
@@ -99,7 +103,7 @@ def Make_Homepage (request):
                             },
                         )
                     else :
-                        messages.success(request, "Changes made successfully.")
+                        messages.success(request, "Changes made successfully!")
                         return render(
                             request,
                             "Announcements_admin.html",
@@ -115,7 +119,7 @@ def Make_Homepage (request):
                     return render(
                         request,
                         "Announcements_admin.html",
-                        context={"announcements": announcements, "status_check": 1},
+                        context={"announcements": announcements, "status_check": {1,2}},
                     )
 
                 elif "delete" in request.POST:
@@ -135,7 +139,7 @@ def Make_Homepage (request):
                                         item1.delete()
                                         break
 
-                    messages.success(request, "Deleted Successfully")
+                    messages.success(request, "Deleted Successfully !")
                     return render(
                         request,
                         "Announcements_admin.html",
@@ -144,21 +148,21 @@ def Make_Homepage (request):
                             "status_check": 0,
                             "messages": messages.get_messages(request),
                         },
-                    )      
+                    )
             else:
                 return render(
                     request, "Announcements_admin.html", context={"announcements": announcements}
                 )
     else:
         return render(request, "Error.html")
-    
+
 def map (request):
     # rendering the map page
     if request.user.is_authenticated:
         return render (request, 'Map.html')
     else:
         return render(request, "Error.html")
-    
+
 def contact (request):
     # rendering the contact page
     if request.user.is_authenticated:
@@ -176,6 +180,51 @@ def shop (request):
 def dues (request):
     # rendering the dues page
     if request.user.is_authenticated:
-        return render (request, 'dues.html')
+        if(request.user.designation == 'Hall Manager'):
+            return render (request, 'dues.html')
+        else:
+            dues = request.user.dues
+            return render (request, 'dues.html', context = {'dues': dues})
+    else:
+        return render(request, "Error.html")
+
+def addDues (request):
+    # rendering the add dues page
+    if request.user.is_authenticated:
+        if(request.user.designation == 'Hall Manager'):
+            if(request.method == "POST"):
+                    user_name = request.POST.get('username')
+                    if(User_class.objects.filter(username = user_name).exists() == False):
+                        messages.error(request, "User does not exist!")
+                        return render (request, 'addDues.html', context = {'message': messages.get_messages(request)})
+
+                    amount = int(request.POST.get('amount'))
+                    User_class.objects.filter(username = user_name).update(dues = amount)
+                    messages.success(request, "Dues were updated successfully!")
+                    return render (request, 'addDues.html', context = {'message': messages.get_messages(request)})
+
+            else:
+                return render (request, 'addDues.html')
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+
+def viewDues (request):
+    # rendering the view dues page
+    if request.user.is_authenticated:
+        if(request.user.designation == 'Hall Manager'):
+            if(request.method == "POST"):
+                user_name = request.POST.get('username')
+                if(User_class.objects.filter(username = user_name).exists() == False):
+                    messages.error(request, "User does not exist!")
+                    return render (request, 'viewDues.html', context = {'message': messages.get_messages(request)})
+
+                dues = User_class.objects.filter(username = user_name)[0].dues
+                return render (request, 'viewDues.html', context = {'dues': dues, 'user_name': user_name})
+            else:
+                return render (request, 'viewDues.html')
+        else:
+            return render(request, "Error.html")
     else:
         return render(request, "Error.html")

@@ -52,7 +52,12 @@
                 <tbody>
                     {%for item in announcements%}
                       <tr>
-                          <td>{{ forloop.counter }}</td>
+                          <td>
+                            {% if item.Announcement_Date ==  todays_date%}
+                            <div style="font-style: italic; color:blue">NEW</div>
+                            {% endif %}
+                            {{ forloop.counter }}
+                          </td>
                           <td>{{item.Item_Name}}</td>
                           <td>{{item.Announcement_Date}}</td>
                       </tr>

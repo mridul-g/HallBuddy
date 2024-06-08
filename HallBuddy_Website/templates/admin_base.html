@@ -207,9 +207,11 @@
                     />
                   </div>
                   <div class="guest-room-booking-group51">
-                    <span class="guest-room-booking-text06">
-                      <span>Dues</span>
-                    </span>
+                    <a href="/Home/dues">
+                      <span class="guest-room-booking-text06">
+                        <span>Dues</span>
+                      </span>
+                    </a>
                     <div class="guest-room-booking-peoplealtblack24dp1">
                       <div class="guest-room-booking-group"></div>
                       <div class="guest-room-booking-group1">
@@ -305,9 +307,10 @@
                     <div class="guest-room-booking-group51">
                       <span class="guest-room-booking-text06">
                         <a href="/guestroom/aprooved" class="guest-room-booking-text08">
-                        <span>Aprooved Requests</span>
+                        <span>Approved Requests</span>
                         </a>
                       </span>
+
                       <div class="guest-room-booking-peoplealtblack24dp1">
                         <div class="guest-room-booking-group"></div>
                         <div class="guest-room-booking-group1">
@@ -321,6 +324,11 @@
                         </div>
                       </div>
                     </div>
+                    <div class="guest-room-booking-group50">
+                    <a href="/guestroom/update" class="guest-room-booking-text08">
+                      <span>Update Room</span>
+                    </a>
+                  </div>
                     <!-- Pending-->
                     {% if request.path == "/guestroom/pending" or request.path == "/Home/" %}
                     <img
@@ -337,6 +345,14 @@
                       class="guest-room-booking-rectangle8"
                     />
                     {% endif %}
+                    <!-- Update Room -->
+                    {% if request.path == "/guestroom/update"%}
+                    <img
+                      alt="Rectangle73134"
+                      src="/static/public/external/rectangle73134-y8t-200w.png"
+                      class="guest-room-booking-rectangle9"
+                    />
+                    {% endif%}
                   </div>
               {% endif %}
               <div class="guest-room-booking-frame1358">
@@ -386,7 +402,7 @@
                 </a>
               {% endif %}
             </div>
-            
+
           </div>
           <button class="guest-room-booking-frame-button-master"></button>
           <img

@@ -1,0 +1,112 @@
+{%include "admin_base.html"%} {%load static%}
+<html lang="en">
+
+<head>
+
+  <title>Guestroom</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+  <style>
+    body {
+      background: #e5e5e5;
+    }
+
+    .btn-sm {
+      padding=10% 0;
+    }
+
+    .success{
+        text-align: center;
+        padding-bottom: 1vh;
+        color: white;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        font-size: 1.2em;
+    }
+    td{
+        text-align: center;
+    }
+    .btn_success{
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        right: -85%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="{{message.tags}}"  style="color:white">
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif %}
+    <div class="main_div">
+    <form method="POST" action="update">
+        {% csrf_token %}
+        <span>
+            <button type="submit" name="add_room" class="btn btn-success" style="position:relative;right:-85%;">
+                <input type="hidden" name="editable_mode"/>Add New Room
+            </button>
+        </span>
+    </form>
+    <br>
+    <br>
+    {% comment %} <img src="{%static 'GuestRB.png'%}" style="position:relative;left:100px;"><br><br> {% endcomment %}
+    <table class="grb" cellspacing="10px" cellpadding="5px" align="right">
+
+      <tr>
+        <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Room Type</th>
+        <th style="text-align: center;">Price per day</th>
+        <th style="text-align: center;">Action</th>
+      </tr>
+      {% for room in rooms %}
+        <tr>
+          <form method="post" action='update'>
+            {% csrf_token %}
+            <td>{{room.room_no}}
+              <input name='room{{room.id}}' value="{{room.room}}" style="text-align: center;" required></input>
+            </td>
+            <td>
+              <input name="type{{room.id}}" value="{{room.type}}" style="text-align: center;" required></input>
+            </td>
+            <td> Rs.
+              <input type="number" min="0" name="price{{room.id}}" value="{{room.price}}" style="text-align: center;" required></input>
+            </td>
+            <td>
+                <button type="submit" name="update" value="{{room.id}}" class="btn btn-success btn-sm">
+                    <input type="hidden" name="editable_mode" />Update
+                </button>
+                <button type="submit" name="delete" value="{{room.id}}" class="btn btn-danger btn-sm">
+                    <input type="hidden" name="editable_mode" />Delete
+                </button>
+            </td>
+          </form>
+        </tr>
+      {% endfor %}
+
+    </table>
+    <p><br></p>
+  </div>
+
+  </div>
+  </div>
+</body>
+
+</html>

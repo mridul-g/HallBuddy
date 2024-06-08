@@ -31,15 +31,21 @@ def mark_date(request):
         room = decoded_body.get('room')
         cleaned = decoded_body.get('cleaned') == True
         date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        obj = MarkedDate(
-            User_Name=request.user.username,
-            room=room,
-            date=date,
-            cleaned = cleaned
-        )
-        obj.save()
+        if date <= datetime.now().date():
+            if MarkedDate.objects.filter(room=room, date=date).exists():
+                obj = MarkedDate.objects.filter(room=room, date=date)[0]
+                obj.cleaned = cleaned
+                obj.save()
+            else:
+                obj = MarkedDate(
+                            User_Name=request.user.username,
+                            room=room,
+                            date=date,
+                            cleaned = cleaned
+                        )
+                obj.save()
         #MarkedDate.objects.update_or_create(date=date, defaults=None) #{'cleaned': cleaned})
-        print("date marked")
+            print("date marked")
         # return JsonResponse({'status': 'ok'})
 
         return render(request, 'Cleaning_Management.html')
@@ -66,11 +72,11 @@ def get_records(request):
                 # print("Inside get_records")
                 # print("Date:",f_date)
                 # print("Room:",room)
-                if (f_date=="" and room=="Room Number"):
+                if (f_date=="" and room==""):
                     record_list =MarkedDate.objects.filter()
                 elif(f_date==""):
                     record_list =MarkedDate.objects.filter(room=room)
-                elif(room=="Room Number"):
+                elif(room==""):
                     record_list =MarkedDate.objects.filter(date=f_date)
                 else:
                     record_list =MarkedDate.objects.filter(room=room,date=f_date)

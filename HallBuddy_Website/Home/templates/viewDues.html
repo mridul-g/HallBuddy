@@ -30,21 +30,25 @@
     {% endfor %}
     {% endif %}
 
-    {% if request.user.designation == "Student" %}
-      <div class="dues_info">
+    {% if user_name %}
+    <div class="dues_info">
         {% if dues %}
-        <p style="color:white">You have pending dues of Rs. {{ dues }}</p>
+        <p style="color:white"> {{user_name}} have pending dues of Rs. {{ dues }}</p>
         {% else %}
-        <p style="color:white">You have no pending dues.</p>
+        <p style="color:white">{{user_name}} have no pending dues.</p>
         {% endif %}
-      </div>
-      <a href="../../payments/adhoc"><button class="btn btn-success">Pay Your Dues</button></a>
-    {% else %}
-    <div class="admin_controls">
-      <a href="viewDues"><button class="btn btn-primary">View Dues</button></a>
-      <a href="addDues"><button class="btn btn-warning">Update Dues</button></a>
     </div>
     {% endif %}
+
+    <form method="POST" action="viewDues">
+        {% csrf_token %}
+        <div class="form_ar">
+        <label for="username" style="color:white">Username</label>
+        <input type="text" name="username" id="username" required>
+        <button type="submit " value="View Dues" class="btn btn-primary"> View Dues</button>
+        </div>
+    </form>
+
   </body>
 </div>
 </body>

@@ -4,6 +4,7 @@
 {% include "admin_base.html" %}
 {% endif %}
 {%load static%}
+
 <html lang="en">
 
 <head>
@@ -29,24 +30,17 @@
     </div>
     {% endfor %}
     {% endif %}
-
-    {% if request.user.designation == "Student" %}
-      <div class="dues_info">
-        {% if dues %}
-        <p style="color:white">You have pending dues of Rs. {{ dues }}</p>
-        {% else %}
-        <p style="color:white">You have no pending dues.</p>
-        {% endif %}
-      </div>
-      <a href="../../payments/adhoc"><button class="btn btn-success">Pay Your Dues</button></a>
-    {% else %}
-    <div class="admin_controls">
-      <a href="viewDues"><button class="btn btn-primary">View Dues</button></a>
-      <a href="addDues"><button class="btn btn-warning">Update Dues</button></a>
-    </div>
-    {% endif %}
-  </body>
-</div>
+    <form method="POST" action="addDues">
+        {% csrf_token %}
+        <div class="form_ar">
+        <label for="username" style="color:white">Username</label>
+        <input type="text" name="username" id="username" required>
+        <label for="amount" style="color:white">Enter Dues Amount</label>
+        <input type="number" name="amount" id="amount" required>
+        <button type="submit " value="Update Dues" class="btn btn-primary"> Update Dues</button>
+        </div>
+    </form>
+  </div>
 </body>
 
 </html>
